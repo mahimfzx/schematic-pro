@@ -2,39 +2,39 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Schematic Pro Ultimate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* =========================================
            CSS VARIABLES (THEMING)
            ========================================= */
         :root {
-            /* Dark Theme (Default) */
-            --primary: #ebc107;
-            --primary-glow: rgba(235, 193, 7, 0.3);
-            --bg-body: #0b0c10;
-            --surface: #1f2833;
-            --surface-hover: #2b3544;
-            --text-main: #ffffff;
-            --text-sub: #c5c6c7;
-            --border: #333;
-            --box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            --input-bg: #15181e;
+            /* Light Theme (Default) */
+            --primary-grad: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-body: #f0f4f8;
+            --surface: #ffffff;
+            --text-main: #2d3748;
+            --text-sub: #718096;
+            --border: #e2e8f0;
+            --shadow-soft: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+            --shadow-3d: 0 10px 20px rgba(0,0,0,0.08);
+            --glass: rgba(255, 255, 255, 0.85);
+            --radius: 16px;
+            --btn-text: #fff;
         }
 
-        [data-theme="light"] {
-            /* Light Theme */
-            --primary: #d4a000;
-            --primary-glow: rgba(212, 160, 0, 0.2);
-            --bg-body: #f4f6f8;
-            --surface: #ffffff;
-            --surface-hover: #f0f0f0;
-            --text-main: #1a202c;
-            --text-sub: #4a5568;
-            --border: #e2e8f0;
-            --box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            --input-bg: #ffffff;
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --primary-grad: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            --bg-body: #0f172a;
+            --surface: #1e293b;
+            --text-main: #e2e8f0;
+            --text-sub: #94a3b8;
+            --border: #334155;
+            --shadow-soft: 5px 5px 10px #0b1120, -5px -5px 10px #27354d;
+            --shadow-3d: 0 10px 20px rgba(0,0,0,0.4);
+            --glass: rgba(30, 41, 59, 0.9);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -42,153 +42,164 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            transition: background 0.3s, color 0.3s;
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
-            font-size: 16px;
+            font-size: 15px;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* Tech Fonts for Headings */
-        h1, h2, .brand-title, .model-name, .chip { font-family: 'Rajdhani', sans-serif; }
+        /* Typography */
+        h1, h2, .brand-title, .model-name { font-family: 'Rajdhani', sans-serif; }
 
         #app-container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             min-height: 100vh;
             background: var(--bg-body);
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
             position: relative;
             display: flex;
             flex-direction: column;
+            transition: background 0.3s;
         }
 
         /* =========================================
            HEADER SECTION
            ========================================= */
         header {
-            background: var(--surface);
-            padding: 15px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--primary-glow);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
             transition: background 0.3s;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
         }
 
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 15px;
         }
 
         .brand-title {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 28px;
+            font-weight: 800;
+            background: var(--primary-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .theme-toggle {
-            background: transparent;
+            background: var(--surface);
             border: 1px solid var(--border);
             color: var(--text-main);
             width: 40px; height: 40px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
+            box-shadow: var(--shadow-soft);
             transition: 0.3s;
         }
-        .theme-toggle:hover { background: var(--surface-hover); color: var(--primary); }
 
         /* Search Bar */
-        .search-wrapper { position: relative; width: 100%; }
+        .search-wrapper { 
+            position: relative; 
+            width: 100%; 
+            margin-bottom: 15px;
+            border-radius: 50px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+        }
         
         .search-icon-svg {
             position: absolute;
-            left: 15px; top: 50%;
+            left: 18px; top: 50%;
             transform: translateY(-50%);
-            width: 18px; height: 18px;
-            fill: var(--primary);
+            width: 20px; height: 20px;
+            fill: var(--text-sub);
         }
 
         input#searchBox {
             width: 100%;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
+            background: transparent;
+            border: none;
             color: var(--text-main);
-            padding: 14px 15px 14px 45px;
-            border-radius: 10px;
+            padding: 16px 20px 16px 50px;
             font-size: 15px;
-            transition: 0.3s;
+            font-weight: 500;
         }
-
-        input#searchBox:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
-        }
+        input#searchBox:focus { outline: none; }
 
         /* Filter Chips */
         .filters {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 5px;
+            display: flex; gap: 10px; overflow-x: auto; padding: 5px 2px;
         }
-        
         .filters::-webkit-scrollbar { height: 0; }
 
         .chip {
-            background: var(--bg-body);
-            border: 1px solid var(--border);
+            background: var(--surface);
             color: var(--text-sub);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
+            border: 1px solid var(--border);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
             transition: 0.3s;
         }
 
         .chip.active {
-            background: var(--primary);
-            color: #000;
-            border-color: var(--primary);
+            background: var(--primary-grad);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.4);
         }
 
         /* =========================================
            LIST VIEW SECTION
            ========================================= */
         .list-view { 
-            padding: 10px 0; 
-            flex: 1; /* Pushes footer down */
-            min-height: 50vh;
+            padding: 15px 20px; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px;
         }
 
         .list-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid var(--border);
+            padding: 18px 20px;
+            border-radius: var(--radius);
+            background: var(--surface);
             cursor: pointer;
-            transition: background 0.2s;
-            background: var(--bg-body);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
         }
 
-        .list-item:active { background: var(--surface-hover); }
+        .list-item:active { transform: scale(0.98); }
 
-        .model-info { display: flex; flex-direction: column; }
-        .model-name { font-size: 18px; font-weight: 700; color: var(--text-main); }
-        .arrow-svg { width: 20px; height: 20px; fill: var(--primary); }
+        .model-name { font-size: 17px; font-weight: 700; color: var(--text-main); }
+        .arrow-svg { 
+            width: 24px; height: 24px; fill: var(--text-sub); 
+            background: var(--bg-body); padding: 5px; border-radius: 50%;
+        }
 
         /* =========================================
-           DETAIL VIEW (OVERLAY)
+           DETAIL VIEW
            ========================================= */
         .detail-view {
             position: fixed;
@@ -197,128 +208,153 @@
             z-index: 200;
             overflow-y: auto;
             transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-bottom: 50px;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .detail-view.active { transform: translateX(0); }
 
         .detail-header {
-            padding: 15px 20px;
+            padding: 20px;
             display: flex;
             align-items: center;
             background: var(--surface);
-            position: sticky;
-            top: 0;
-            z-index: 210;
+            position: sticky; top: 0; z-index: 210;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
 
         .back-btn {
-            background: transparent; border: none;
-            cursor: pointer; padding-right: 15px;
-            display: flex; align-items: center;
+            background: var(--bg-body); border: 1px solid var(--border);
+            width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            margin-right: 15px;
         }
-        .back-svg { width: 24px; height: 24px; fill: var(--text-main); }
+        .back-svg { width: 20px; height: 20px; fill: var(--text-main); }
 
-        .detail-title { font-size: 22px; font-weight: 700; color: var(--text-main); }
-        .detail-content { padding: 20px; }
+        .detail-title { font-size: 20px; font-weight: 800; color: var(--text-main); }
+        .detail-content { padding: 25px 20px; padding-bottom: 80px; }
 
-        /* Info Boxes */
+        /* Creative Info Boxes */
         .info-box {
             background: var(--surface);
-            border-radius: 12px;
+            border-radius: var(--radius);
             padding: 20px;
             margin-bottom: 20px;
+            box-shadow: var(--shadow-3d);
+            border-left: 5px solid #667eea;
             border: 1px solid var(--border);
-            box-shadow: var(--box-shadow);
-            animation: slideUp 0.4s ease-out;
+            border-left-width: 5px;
+            animation: slideUp 0.5s ease-out;
         }
 
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .info-header {
-            display: flex; align-items: center; gap: 8px;
-            margin-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 10px;
         }
 
-        .info-icon { width: 18px; height: 18px; fill: var(--primary); }
+        .info-icon { width: 22px; height: 22px; fill: #667eea; }
         
         .info-label {
-            font-size: 13px; font-weight: 700;
-            color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;
+            font-size: 12px; font-weight: 800;
+            color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        .info-value {
-            font-size: 16px; color: var(--text-main);
-            word-wrap: break-word; line-height: 1.6;
-        }
-
-        /* Buttons & Previews */
+        /* Buttons */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px 16px; border-radius: 8px;
+            padding: 12px; border-radius: 12px;
             font-size: 14px; font-weight: 600;
             text-decoration: none; border: none; cursor: pointer;
-            transition: transform 0.2s; width: 100%; margin-top: 10px;
+            width: 100%; margin-top: 10px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
         }
-        .btn:active { transform: scale(0.97); }
+        .btn:active { transform: scale(0.95); }
 
-        .btn-dl { background: #e53e3e; color: white; }
-        .btn-view { background: #3182ce; color: white; }
-        .btn-icon { width: 16px; height: 16px; fill: white; }
+        .btn-dl { background: linear-gradient(to right, #ff416c, #ff4b2b); }
+        .btn-view { background: linear-gradient(to right, #56ab2f, #a8e063); }
+        .btn-full { background: var(--primary-grad); margin-top: 5px; } 
+        
+        .btn-icon { width: 18px; height: 18px; fill: white; }
 
         .preview-area {
-            margin-top: 15px; border-radius: 8px;
-            overflow: hidden; border: 1px solid var(--border);
-            background: #eee; display: none;
+            margin-top: 15px; border-radius: 12px;
+            overflow: hidden; border: 2px solid var(--border);
+            background: #fff; display: none;
             position: relative;
         }
-        .preview-area iframe { width: 100%; height: 500px; border: none; }
+        .preview-area iframe { width: 100%; height: 400px; border: none; }
         .preview-area img { width: 100%; display: block; }
 
         /* =========================================
-           FOOTER SECTION
+           FULL SCREEN PDF OVERLAY
+           ========================================= */
+        .pdf-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff; z-index: 9999;
+            display: flex; flex-direction: column;
+            transform: scale(0); opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .pdf-overlay.open { transform: scale(1); opacity: 1; }
+
+        .pdf-toolbar {
+            height: 60px; background: #2d3748; color: white;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .pdf-controls { display: flex; gap: 15px; align-items: center; }
+        
+        .ctrl-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            width: 35px; height: 35px; border-radius: 50%; color: white;
+            font-size: 18px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        .ctrl-btn:active { background: rgba(255,255,255,0.3); }
+
+        .pdf-container { flex: 1; position: relative; overflow: hidden; background: #525659; }
+        .pdf-container iframe { width: 100%; height: 100%; border: none; transition: transform 0.2s; transform-origin: top center; }
+
+        /* =========================================
+           FOOTER
            ========================================= */
         .footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--surface);
+            text-align: center; padding: 30px 20px;
+            background: var(--surface); margin-top: auto;
             border-top: 1px solid var(--border);
-            margin-top: auto;
+            border-top-left-radius: 25px; border-top-right-radius: 25px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.03);
         }
 
         .disclaimer {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-sub);
             margin-bottom: 15px;
             line-height: 1.5;
+            padding: 0 10px;
         }
 
         .dev-info {
-            background: var(--bg-body);
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 50px;
+            background: var(--bg-body); display: inline-block;
+            padding: 8px 25px; border-radius: 50px;
             border: 1px solid var(--border);
         }
+        .dev-info p { font-size: 13px; color: var(--text-main); margin-bottom: 2px; }
+        .dev-info a { color: #667eea; font-weight: 700; text-decoration: none; }
 
-        .dev-info p {
-            font-size: 13px; color: var(--text-main); margin-bottom: 2px;
-        }
-        
-        .dev-info a {
-            color: var(--primary); font-size: 12px; text-decoration: none; font-weight: 600;
-        }
-
-        /* Loader */
+        /* Spinner */
         .spinner {
-            width: 40px; height: 40px; margin: 50px auto;
-            border: 4px solid var(--border);
-            border-top-color: var(--primary);
+            width: 50px; height: 50px; margin: 50px auto;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top-color: #667eea;
             border-radius: 50%; animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -330,7 +366,7 @@
     <div id="app-container">
         <header>
             <div class="header-top">
-                <div class="brand-title">Schematic<span style="color:var(--text-main)">Pro</span></div>
+                <div class="brand-title">Schematic<span style="font-weight:400; color:var(--text-sub);">Pro</span></div>
                 <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
                     <svg class="info-icon" viewBox="0 0 24 24" style="fill:var(--text-main)"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
                 </button>
@@ -338,7 +374,7 @@
             
             <div class="search-wrapper">
                 <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/></svg>
-                <input type="text" id="searchBox" placeholder="Search any model, cpu, battery...">
+                <input type="text" id="searchBox" placeholder="Search model, cpu...">
             </div>
 
             <div class="filters">
@@ -357,7 +393,7 @@
                 <strong>Disclaimer:</strong> This website and its content are for educational and technical repair purposes only. Use these files responsibly.
             </p>
             <div class="dev-info">
-                <p>Developed by <span style="color:var(--primary); font-weight:700;">Mahim Patwary</span></p>
+                <p>Developed by <span style="font-weight:700; color:var(--text-main)">Mahim Patwary</span></p>
                 <a href="mailto:mahimfzx@gmail.com">mahimfzx@gmail.com</a>
             </div>
         </div>
@@ -370,55 +406,88 @@
             </button>
             <div class="detail-title" id="dtTitle">Details</div>
         </div>
-        <div class="detail-content" id="dtContent">
+        <div class="detail-content" id="dtContent"></div>
+    </div>
+
+    <div id="pdfOverlay" class="pdf-overlay">
+        <div class="pdf-toolbar">
+            <span style="font-weight:600;">Full Screen View</span>
+            <div class="pdf-controls">
+                <div class="ctrl-btn" onclick="pdfZoom(-0.1)">−</div>
+                <div class="ctrl-btn" onclick="pdfZoom(0.1)">+</div>
+                <button class="ctrl-btn" style="background:#e53e3e; border-color:#e53e3e" onclick="closeFullPdf()">✕</button>
             </div>
+        </div>
+        <div class="pdf-container">
+            <iframe id="fullPdfFrame" src=""></iframe>
+        </div>
     </div>
 
     <script>
         // ==========================================
         // CONFIGURATION
         // ==========================================
-        // আপনার Apps Script লিংক এখানে দিন (Deployment ID যেন ঠিক থাকে)
         const API_URL = 'https://script.google.com/macros/s/AKfycby-Mj4FPLQaCtRBsAQ4vYgFnzZOqZ-E1prVqISq5FIclFqBwC2xsxOzLHD99wf0TGON/exec'; 
 
-        // SVG ICONS LIBRARY
         const ICONS = {
             pdf: '<svg class="info-icon" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>',
             image: '<svg class="info-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>',
             text: '<svg class="info-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>',
             download: '<svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>',
             eye: '<svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>',
+            full: '<svg class="btn-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>',
             sun: '<svg class="info-icon" viewBox="0 0 24 24" style="fill:var(--text-main)"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.79 1.41-1.41-1.79-1.79-1.41 1.41zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>',
             moon: '<svg class="info-icon" viewBox="0 0 24 24" style="fill:var(--text-main)"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>'
         };
 
         let allData = [];
         let currentData = [];
+        let currentZoom = 1;
 
-        // 1. THEME LOGIC
+        // 1. THEME LOGIC (Added Back)
         function toggleTheme() {
             const body = document.body;
             const btn = document.getElementById('themeBtn');
-            const isLight = body.getAttribute('data-theme') === 'light';
+            const isDark = body.getAttribute('data-theme') === 'dark';
             
-            if (isLight) {
+            if (isDark) {
                 body.removeAttribute('data-theme');
                 btn.innerHTML = ICONS.moon;
             } else {
-                body.setAttribute('data-theme', 'light');
+                body.setAttribute('data-theme', 'dark');
                 btn.innerHTML = ICONS.sun;
             }
         }
 
-        // 2. INITIALIZATION
+        // 2. INITIALIZATION & STORAGE LOGIC
         async function init() {
-            try {
-                const res = await fetch(API_URL);
-                allData = await res.json();
+            // Step 1: Check Local Storage & Load immediately
+            const cachedData = localStorage.getItem('schematicData');
+            if (cachedData) {
+                console.log("Loading from Local Storage");
+                allData = JSON.parse(cachedData);
                 currentData = allData;
                 renderList(currentData);
+            }
+
+            // Step 2: Background Fetch API
+            try {
+                const res = await fetch(API_URL);
+                const newData = await res.json();
+                
+                // Compare length to see if update needed
+                if (JSON.stringify(newData) !== cachedData) {
+                    console.log("New Data Found, Updating...");
+                    localStorage.setItem('schematicData', JSON.stringify(newData));
+                    allData = newData;
+                    currentData = allData;
+                    renderList(currentData);
+                }
             } catch (e) {
-                document.getElementById('listView').innerHTML = `<div style="text-align:center;padding:20px;color:red;">Error connecting to database.</div>`;
+                console.error("Fetch Error:", e);
+                if (!cachedData) {
+                    document.getElementById('listView').innerHTML = `<div style="text-align:center;padding:20px;color:red;">Internet check korun.</div>`;
+                }
             }
         }
 
@@ -449,7 +518,7 @@
             container.appendChild(fragment);
         }
 
-        // 4. SEARCH FUNCTIONALITY
+        // 4. SEARCH & SORT
         document.getElementById('searchBox').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase().trim();
             currentData = allData.filter(item => {
@@ -460,11 +529,9 @@
             renderList(currentData);
         });
 
-        // 5. SORTING FUNCTIONALITY
         function sortData(type, el) {
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
-
             if(type === 'all') {
                 document.getElementById('searchBox').value = '';
                 currentData = [...allData];
@@ -476,16 +543,14 @@
             renderList(currentData);
         }
 
-        // Helper: Extract Drive ID from URL (WITH SAFETY CHECK)
+        // Helper: Extract Drive ID
         function getDriveId(url) {
-            // FIX: Check if URL is a string first!
             if (!url || typeof url !== 'string') return null;
-            
             const match = url.match(/[-\w]{25,}/);
             return match ? match[0] : null;
         }
 
-        // 6. DETAILS PAGE LOGIC
+        // 5. DETAILS PAGE LOGIC
         function openDetails(item) {
             const title = document.getElementById('dtTitle');
             const content = document.getElementById('dtContent');
@@ -495,42 +560,34 @@
 
             for (const key in item) {
                 if (!item[key] || key === 'Model Name') continue;
-
                 const value = item[key];
-                // FIX: Convert value to string to avoid crashes with numbers
                 const strValue = String(value || ""); 
-
                 const cleanLabel = key.replace(/_pdf|_img/g, '').replace(/_/g, ' ');
-                const driveId = getDriveId(strValue); // Use safe string value
+                const driveId = getDriveId(strValue);
                 
                 let boxHTML = '';
 
-                // PDF Section
+                // PDF Logic
                 if (key.endsWith('_pdf')) {
-                    let pdfSrc = `https://docs.google.com/viewer?url=${encodeURIComponent(strValue)}&embedded=true`;
-                    if (driveId) {
-                        pdfSrc = `https://drive.google.com/file/d/${driveId}/preview`;
-                    }
+                    let pdfSrc = strValue; 
+                    if (driveId) pdfSrc = `https://drive.google.com/file/d/${driveId}/preview`;
 
                     boxHTML = `
                         <div class="info-box">
                             <div class="info-header">${ICONS.pdf} <span class="info-label">${cleanLabel}</span></div>
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                                 <a href="${strValue}" target="_blank" class="btn btn-dl">${ICONS.download} Download</a>
-                                <button onclick="togglePreview('p-${key}')" class="btn btn-view">${ICONS.eye} View PDF</button>
+                                <button onclick="togglePreview('p-${key}')" class="btn btn-view">${ICONS.eye} Preview</button>
                             </div>
+                            <button onclick="openFullPdf('${pdfSrc}')" class="btn btn-full">${ICONS.full} Full Screen & Search</button>
                             <div id="p-${key}" class="preview-area">
                                 <iframe loading="lazy" src="${pdfSrc}" allow="autoplay"></iframe>
                             </div>
                         </div>`;
                 }
-                // Image Section
                 else if (key.endsWith('_img')) {
                     let imgSrc = strValue;
-                    if (driveId) {
-                        imgSrc = `https://drive.google.com/uc?export=view&id=${driveId}`;
-                    }
-
+                    if (driveId) imgSrc = `https://drive.google.com/uc?export=view&id=${driveId}`;
                     boxHTML = `
                         <div class="info-box">
                             <div class="info-header">${ICONS.image} <span class="info-label">${cleanLabel}</span></div>
@@ -541,13 +598,11 @@
                                 <img loading="lazy" src="${imgSrc}" alt="Preview">
                             </div>
                         </div>`;
-                }
-                // Text Section
-                else {
+                } else {
                     boxHTML = `
                         <div class="info-box">
                             <div class="info-header">${ICONS.text} <span class="info-label">${cleanLabel}</span></div>
-                            <div class="info-value">${value}</div>
+                            <div style="font-size:15px; color:var(--text-main); line-height:1.6;">${value}</div>
                         </div>`;
                 }
                 content.innerHTML += boxHTML;
@@ -565,6 +620,42 @@
         function togglePreview(id) {
             const el = document.getElementById(id);
             el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // 6. FULL SCREEN PDF LOGIC
+        function openFullPdf(url) {
+            const overlay = document.getElementById('pdfOverlay');
+            const frame = document.getElementById('fullPdfFrame');
+            frame.src = url;
+            overlay.classList.add('open');
+            currentZoom = 1;
+            frame.style.transform = `scale(${currentZoom})`;
+        }
+
+        function closeFullPdf() {
+            const overlay = document.getElementById('pdfOverlay');
+            const frame = document.getElementById('fullPdfFrame');
+            overlay.classList.remove('open');
+            frame.src = ""; 
+        }
+
+        function pdfZoom(amount) {
+            const frame = document.getElementById('fullPdfFrame');
+            currentZoom += amount;
+            if(currentZoom < 0.5) currentZoom = 0.5;
+            if(currentZoom > 3) currentZoom = 3;
+            frame.style.transform = `scale(${currentZoom})`;
+            if(currentZoom > 1) {
+                frame.style.width = `${100/currentZoom}%`;
+                frame.style.height = `${100/currentZoom}%`;
+                frame.style.marginLeft = `${(100 - (100/currentZoom))/2}%`;
+                frame.style.marginTop = `${(100 - (100/currentZoom))/2}%`;
+            } else {
+                frame.style.width = '100%';
+                frame.style.height = '100%';
+                frame.style.marginLeft = '0';
+                frame.style.marginTop = '0';
+            }
         }
 
         init();
