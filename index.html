@@ -1,73 +1,79 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="My App Name">
-<link rel="apple-touch-icon" href="icon-192.png">
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Schematic Pro Ultimate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300;400;600;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&display=swap" rel="stylesheet">
+
     <style>
         /* =========================================
-           CSS VARIABLES (THEMING)
+           COSMIC POP THEME VARIABLES
            ========================================= */
         :root {
-            /* Light Theme (Default) */
-            --primary-grad: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg-body: #f0f4f8;
+            /* Cosmic Pop Light */
+            --bg-body: #f3f4f7;
             --surface: #ffffff;
-            --text-main: #2d3748;
-            --text-sub: #718096;
-            --border: #e2e8f0;
-            --shadow-soft: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
-            --shadow-3d: 0 10px 20px rgba(0,0,0,0.08);
-            --glass: rgba(255, 255, 255, 0.85);
-            --radius: 16px;
-            --btn-text: #fff;
+            --primary: #6c5ce7;
+            --accent: #fd79a8;
+            --grad-cosmic: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            --grad-pop: linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+            --grad-text: linear-gradient(90deg, #FF3CAC, #2B86C5);
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+            --border: #dfe6e9;
+            --glass: rgba(255, 255, 255, 0.9);
+            --shadow-app: 0 10px 30px rgba(0,0,0,0.08);
+            --radius: 20px;
+            --nav-height: 70px;
         }
 
         [data-theme="dark"] {
-            /* Dark Theme */
-            --primary-grad: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            --bg-body: #0f172a;
-            --surface: #1e293b;
-            --text-main: #e2e8f0;
-            --text-sub: #94a3b8;
-            --border: #334155;
-            --shadow-soft: 5px 5px 10px #0b1120, -5px -5px 10px #27354d;
-            --shadow-3d: 0 10px 20px rgba(0,0,0,0.4);
-            --glass: rgba(30, 41, 59, 0.9);
+            /* Cosmic Pop Dark */
+            --bg-body: #0f0c29;
+            --surface: #1b1b3a; /* Deep cosmic blue */
+            --primary: #a29bfe;
+            --accent: #ff7675;
+            --grad-cosmic: linear-gradient(135deg, #302b63 0%, #24243e 100%);
+            --grad-pop: linear-gradient(135deg, #f53844 0%, #42378f 100%);
+            --grad-text: linear-gradient(90deg, #00f260, #0575E6);
+            --text-main: #dfe6e9;
+            --text-sub: #b2bec3;
+            --border: #2d3436;
+            --glass: rgba(27, 27, 58, 0.95);
+            --shadow-app: 0 10px 40px rgba(0,0,0,0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background-color: var(--bg-body);
+            background: var(--bg-body);
             color: var(--text-main);
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            font-size: 15px;
-            transition: background 0.3s, color 0.3s;
+            font-family: 'Bricolage Grotesque', 'Anek Bangla', sans-serif;
+            overflow: hidden; /* App style: no body scroll */
+            height: 100vh;
+            width: 100vw;
+            transition: background 0.4s, color 0.4s;
+            user-select: none;
         }
 
-        /* Typography */
-        h1, h2, .brand-title, .model-name { font-family: 'Rajdhani', sans-serif; }
-
+        /* App Container */
         #app-container {
-            max-width: 650px;
-            margin: 0 auto;
-            min-height: 100vh;
-            background: var(--bg-body);
-            position: relative;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            transition: background 0.3s;
+            position: relative;
+            max-width: 600px; /* Mobile View Limit */
+            margin: 0 auto;
+            background: var(--bg-body);
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
         }
 
         /* =========================================
@@ -75,17 +81,12 @@
            ========================================= */
         header {
             background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 15px 20px 5px 20px;
+            z-index: 50;
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            transition: background 0.3s;
+            flex-shrink: 0;
         }
 
         .header-top {
@@ -95,364 +96,524 @@
             margin-bottom: 15px;
         }
 
+        /* Creative Logo */
+        .logo-area { display: flex; align-items: center; gap: 8px; }
+        .logo-svg { width: 32px; height: 32px; fill: url(#logoGrad); animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-3px); } 100% { transform: translateY(0px); } }
+
         .brand-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            background: var(--primary-grad);
+            background: var(--grad-pop);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: -0.5px;
         }
 
-        .theme-toggle {
+        /* Controls (Theme + Lang) */
+        .controls { display: flex; gap: 10px; }
+        .ctrl-btn {
+            width: 38px; height: 38px;
+            border-radius: 50%;
             background: var(--surface);
             border: 1px solid var(--border);
-            color: var(--text-main);
-            width: 40px; height: 40px;
-            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
-            box-shadow: var(--shadow-soft);
-            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 14px;
+            transition: transform 0.2s;
         }
+        .ctrl-btn:active { transform: scale(0.9); }
 
         /* Search Bar */
         .search-wrapper { 
             position: relative; 
             width: 100%; 
-            margin-bottom: 15px;
-            border-radius: 50px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 10px;
         }
-        
-        .search-icon-svg {
-            position: absolute;
-            left: 18px; top: 50%;
-            transform: translateY(-50%);
-            width: 20px; height: 20px;
-            fill: var(--text-sub);
-        }
-
         input#searchBox {
             width: 100%;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            padding: 16px 20px 16px 50px;
-            font-size: 15px;
-            font-weight: 500;
-        }
-        input#searchBox:focus { outline: none; }
-
-        /* Filter Chips */
-        .filters {
-            display: flex; gap: 10px; overflow-x: auto; padding: 5px 2px;
-        }
-        .filters::-webkit-scrollbar { height: 0; }
-
-        .chip {
             background: var(--surface);
-            color: var(--text-sub);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 14px 20px 14px 45px;
+            font-size: 16px;
+            color: var(--text-main);
+            font-family: inherit;
             transition: 0.3s;
         }
-
-        .chip.active {
-            background: var(--primary-grad);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.4);
-        }
+        input#searchBox:focus { outline: none; border-color: #6c5ce7; box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1); }
+        .search-icon-svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 20px; fill: var(--text-sub); }
 
         /* =========================================
-           LIST VIEW SECTION
+           MARQUEE & REFRESH
            ========================================= */
-        .list-view { 
-            padding: 15px 20px; 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px;
-        }
-
-        .list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 20px;
-            border-radius: var(--radius);
+        .marquee-box {
             background: var(--surface);
-            cursor: pointer;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid var(--border);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 8px;
+            margin-bottom: 5px;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
         }
-
-        .list-item:active { transform: scale(0.98); }
-
-        .model-name { font-size: 17px; font-weight: 700; color: var(--text-main); }
-        .arrow-svg { 
-            width: 24px; height: 24px; fill: var(--text-sub); 
-            background: var(--bg-body); padding: 5px; border-radius: 50%;
+        
+        .marquee-content {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            animation: marquee 15s linear infinite;
         }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        .refresh-area { display: flex; justify-content: center; margin-bottom: 10px; }
+        .refresh-btn {
+            background: var(--surface); border: 1px solid var(--border);
+            padding: 5px 15px; border-radius: 20px;
+            display: flex; align-items: center; gap: 5px;
+            font-size: 12px; font-weight: 700; color: var(--text-sub);
+            cursor: pointer; transition: 0.3s;
+        }
+        .refresh-btn:active { transform: scale(0.95); background: var(--bg-body); }
+        .spin-icon { width: 14px; height: 14px; fill: var(--text-sub); }
+        .spinning { animation: spin 1s linear infinite; }
+
+        /* Filters */
+        .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
+        .filters::-webkit-scrollbar { display: none; }
+        .chip {
+            background: var(--surface); border: 1px solid var(--border);
+            color: var(--text-sub); padding: 6px 16px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; white-space: nowrap; transition: 0.3s;
+        }
+        .chip.active { background: var(--grad-cosmic); color: #fff; border-color: transparent; }
 
         /* =========================================
-           DETAIL VIEW
+           SCROLLABLE CONTENT AREA
+           ========================================= */
+        #content-area {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 15px 20px 100px 20px; /* Padding bottom for nav bar */
+            scroll-behavior: smooth;
+        }
+
+        /* List Items */
+        .list-item {
+            background: var(--surface);
+            margin-bottom: 12px;
+            padding: 16px;
+            border-radius: 16px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 2px 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
+            transition: 0.2s;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .list-item:active { transform: scale(0.98); }
+        .model-name { font-weight: 700; font-size: 16px; }
+        .arrow-icon { width: 24px; height: 24px; fill: var(--text-sub); background: var(--bg-body); padding: 5px; border-radius: 50%; }
+
+        /* Spinner */
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(108, 92, 231, 0.2); border-top-color: #6c5ce7; border-radius: 50%; margin: 30px auto; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* =========================================
+           TAB VIEWS (Share / Feedback)
+           ========================================= */
+        .tab-view { display: none; padding: 20px; text-align: center; animation: fadeIn 0.3s; }
+        .tab-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Share Card & QR */
+        .share-card {
+            background: var(--surface); border-radius: 20px; padding: 30px;
+            border: 2px dashed var(--primary);
+            position: relative; overflow: hidden;
+        }
+        .qr-img {
+            width: 150px; height: 150px; margin: 0 auto 20px;
+            display: block; border-radius: 10px;
+            border: 1px solid var(--border); padding: 5px; background: white;
+        }
+        .btn-action {
+            width: 100%; padding: 15px; border-radius: 15px; border: none;
+            background: var(--grad-pop); color: white; font-weight: 700; font-size: 16px;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        
+        /* Feedback Form */
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 14px; color: var(--text-sub); }
+        .form-input {
+            width: 100%; padding: 15px; border-radius: 12px;
+            background: var(--bg-body); border: 1px solid var(--border);
+            color: var(--text-main); font-family: inherit; font-size: 15px;
+        }
+        .form-input:focus { outline: none; border-color: var(--primary); }
+        textarea.form-input { height: 120px; resize: none; }
+
+        /* =========================================
+           FOOTER (New)
+           ========================================= */
+        .app-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .dev-badge {
+            background: var(--surface);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .dev-text { font-size: 13px; color: var(--text-sub); margin-bottom: 4px; }
+        .dev-name { font-weight: 800; color: var(--text-main); font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px; }
+        .dev-link { color: #6c5ce7; font-weight: 700; text-decoration: none; font-size: 13px; }
+
+        /* =========================================
+           BOTTOM NAVIGATION
+           ========================================= */
+        .bottom-nav {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 100;
+            border-top-left-radius: 25px; border-top-right-radius: 25px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            color: var(--text-sub); font-size: 12px; font-weight: 600;
+            cursor: pointer; width: 60px; transition: 0.3s;
+        }
+        .nav-icon { width: 24px; height: 24px; fill: var(--text-sub); transition: 0.3s; }
+        
+        .nav-item.active { color: #6c5ce7; }
+        .nav-item.active .nav-icon { fill: #6c5ce7; transform: translateY(-3px); filter: drop-shadow(0 4px 6px rgba(108, 92, 231, 0.4)); }
+
+        /* =========================================
+           DETAIL VIEW (Full Overlay)
            ========================================= */
         .detail-view {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--bg-body);
-            z-index: 200;
-            overflow-y: auto;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--bg-body); z-index: 200;
+            transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column;
         }
-
         .detail-view.active { transform: translateX(0); }
-
-        .detail-header {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            background: var(--surface);
-            position: sticky; top: 0; z-index: 210;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-bottom: 1px solid var(--border);
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-
-        .back-btn {
-            background: var(--bg-body); border: 1px solid var(--border);
-            width: 40px; height: 40px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            margin-right: 15px;
-        }
-        .back-svg { width: 20px; height: 20px; fill: var(--text-main); }
-
-        .detail-title { font-size: 20px; font-weight: 800; color: var(--text-main); }
-        .detail-content { padding: 25px 20px; padding-bottom: 80px; }
-
-        /* Creative Info Boxes */
-        .info-box {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-3d);
-            border-left: 5px solid #667eea;
-            border: 1px solid var(--border);
-            border-left-width: 5px;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .info-header {
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 10px;
-        }
-
-        .info-icon { width: 22px; height: 22px; fill: #667eea; }
         
-        .info-label {
-            font-size: 12px; font-weight: 800;
-            color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px;
+        .dt-header {
+            padding: 15px 20px; background: var(--surface);
+            display: flex; align-items: center; gap: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-top: max(15px, env(safe-area-inset-top));
         }
+        .dt-content { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 80px; }
 
-        /* Buttons */
+        .info-box {
+            background: var(--surface); border-radius: 15px; padding: 20px;
+            margin-bottom: 20px; border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-app);
+        }
+        .info-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
+        .info-label { font-weight: 800; font-size: 12px; color: var(--text-sub); text-transform: uppercase; }
+        .info-icon { width: 20px; height: 20px; fill: var(--primary); }
+
         .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px; border-radius: 12px;
-            font-size: 14px; font-weight: 600;
-            text-decoration: none; border: none; cursor: pointer;
-            width: 100%; margin-top: 10px;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: 0.2s;
+            width: 100%; padding: 12px; border-radius: 10px;
+            border: none; font-weight: 600; font-size: 14px;
+            margin-top: 8px; cursor: pointer; color: white;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn:active { transform: scale(0.95); }
-
         .btn-dl { background: linear-gradient(to right, #ff416c, #ff4b2b); }
         .btn-view { background: linear-gradient(to right, #56ab2f, #a8e063); }
-        .btn-full { background: var(--primary-grad); margin-top: 5px; } 
-        
-        .btn-icon { width: 18px; height: 18px; fill: white; }
-
-        .preview-area {
-            margin-top: 15px; border-radius: 12px;
-            overflow: hidden; border: 2px solid var(--border);
-            background: #fff; display: none;
-            position: relative;
-        }
-        .preview-area iframe { width: 100%; height: 400px; border: none; }
-        .preview-area img { width: 100%; display: block; }
+        .btn-full { background: var(--grad-cosmic); }
+        .preview-area { display: none; margin-top: 15px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: white; }
+        .preview-area iframe, .preview-area img { width: 100%; display: block; border: none; }
+        .preview-area iframe { height: 350px; }
 
         /* =========================================
-           FULL SCREEN PDF OVERLAY
+           PDF FULL SCREEN OVERLAY
            ========================================= */
         .pdf-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; z-index: 9999;
+            background: #fff; z-index: 300;
             display: flex; flex-direction: column;
-            transform: scale(0); opacity: 0;
-            transition: transform 0.3s, opacity 0.3s;
+            transform: scale(0); transition: 0.3s;
         }
-        .pdf-overlay.open { transform: scale(1); opacity: 1; }
-
+        .pdf-overlay.open { transform: scale(1); }
         .pdf-toolbar {
-            height: 60px; background: #2d3748; color: white;
+            height: 60px; background: #2d3436; color: white;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 0 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 0 15px; padding-top: env(safe-area-inset-top);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        .pdf-controls { display: flex; gap: 15px; align-items: center; }
-        
-        .ctrl-btn {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            width: 35px; height: 35px; border-radius: 50%; color: white;
-            font-size: 18px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
+        .pdf-controls { display: flex; gap: 10px; }
+        .zoom-btn {
+            width: 30px; height: 30px; border-radius: 5px; background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3); color: white; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: bold;
         }
-        .ctrl-btn:active { background: rgba(255,255,255,0.3); }
-
-        .pdf-container { flex: 1; position: relative; overflow: hidden; background: #525659; }
-        .pdf-container iframe { width: 100%; height: 100%; border: none; transition: transform 0.2s; transform-origin: top center; }
-
-        /* =========================================
-           FOOTER
-           ========================================= */
-        .footer {
-            text-align: center; padding: 30px 20px;
-            background: var(--surface); margin-top: auto;
-            border-top: 1px solid var(--border);
-            border-top-left-radius: 25px; border-top-right-radius: 25px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.03);
+        .zoom-btn:active { background: rgba(255,255,255,0.4); }
+        .pdf-container { 
+            flex: 1; background: #525659; overflow: auto; position: relative; 
+            display: flex; align-items: flex-start; justify-content: center;
         }
-
-        .disclaimer {
-            font-size: 11px;
-            color: var(--text-sub);
-            margin-bottom: 15px;
-            line-height: 1.5;
-            padding: 0 10px;
+        .pdf-wrapper {
+            width: 100%; height: 100%;
+            transition: transform 0.2s ease-out;
+            transform-origin: top center;
         }
+        .pdf-wrapper iframe { width: 100%; height: 100%; border: none; background: white; }
 
-        .dev-info {
-            background: var(--bg-body); display: inline-block;
-            padding: 8px 25px; border-radius: 50px;
-            border: 1px solid var(--border);
-        }
-        .dev-info p { font-size: 13px; color: var(--text-main); margin-bottom: 2px; }
-        .dev-info a { color: #667eea; font-weight: 700; text-decoration: none; }
-
-        /* Spinner */
-        .spinner {
-            width: 50px; height: 50px; margin: 50px auto;
-            border: 4px solid rgba(102, 126, 234, 0.2);
-            border-top-color: #667eea;
-            border-radius: 50%; animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
+        /* SVG Gradients */
+        svg { overflow: visible; }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
     <div id="app-container">
+        
         <header>
+            <svg width="0" height="0">
+                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF3CAC;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#2B86C5;stop-opacity:1" />
+                </linearGradient>
+            </svg>
+
             <div class="header-top">
-                <div class="brand-title">Schematic<span style="font-weight:400; color:var(--text-sub);">Pro</span></div>
-                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
-                    <svg class="info-icon" viewBox="0 0 24 24" style="fill:var(--text-main)"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
-                </button>
-            </div>
-            
-            <div class="search-wrapper">
-                <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/></svg>
-                <input type="text" id="searchBox" placeholder="Search model, cpu...">
+                <div class="logo-area">
+                    <svg class="logo-svg" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+                    <div class="brand-title">Schematic</div>
+                </div>
+                <div class="controls">
+                    <div class="ctrl-btn" id="langBtn" onclick="toggleLang()">EN</div>
+                    <div class="ctrl-btn" onclick="toggleTheme()" id="themeBtn">
+                        <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:var(--text-main)"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+                    </div>
+                </div>
             </div>
 
-            <div class="filters">
-                <div class="chip active" onclick="sortData('all', this)">All Models</div>
-                <div class="chip" onclick="sortData('asc', this)">A-Z Name</div>
-                <div class="chip" onclick="sortData('desc', this)">Z-A Name</div>
+            <div class="search-wrapper">
+                <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/></svg>
+                <input type="text" id="searchBox" placeholder="Search schematic...">
+            </div>
+
+            <div class="marquee-box">
+                <div class="marquee-content" id="marqueeText">
+                    Assalamu Alaikum! Welcome to Schematic Pro. Disclaimer: Use these files for educational and repair purposes only.
+                </div>
+            </div>
+
+            <div class="refresh-area">
+                <div class="refresh-btn" onclick="forceRefresh()">
+                    <svg class="spin-icon" id="spinIcon" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                    <span data-lang="refresh">Refresh Data</span>
+                </div>
+            </div>
+
+            <div class="filters" id="filterContainer">
+                <div class="chip active" onclick="sortData('all', this)" data-lang="all">All Models</div>
+                <div class="chip" onclick="sortData('asc', this)">A-Z</div>
+                <div class="chip" onclick="sortData('desc', this)">Z-A</div>
             </div>
         </header>
 
-        <div id="listView" class="list-view">
-            <div class="spinner"></div>
+        <div id="content-area">
+            
+            <div id="listView">
+                <div class="spinner"></div>
+            </div>
+            
+            <div class="app-footer" id="mainFooter">
+                <div class="dev-badge">
+                    <div class="dev-text">Developed by</div>
+                    <div class="dev-name">Mahim Patwary</div>
+                    <a href="mailto:mahimfzx@gmail.com" class="dev-link">mahimfzx@gmail.com</a>
+                </div>
+            </div>
+
+            <div id="shareView" class="tab-view">
+                <div class="share-card">
+                    <h2 style="margin-bottom:15px; font-weight:800;" data-lang="shareTitle">Share with Friends</h2>
+                    <img id="qrImage" class="qr-img" src="" alt="QR Code" />
+                    <p style="margin-bottom:20px; font-size:13px; color:var(--text-sub);" data-lang="shareDesc">Scan or click below to share this app.</p>
+                    <button class="btn-action" onclick="shareApp()">
+                        <svg style="width:20px; fill:white" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                        <span data-lang="shareBtn">Share App</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="feedbackView" class="tab-view">
+                <h2 style="margin-bottom:20px; font-weight:800;" data-lang="feedTitle">Feedback</h2>
+                <div class="form-group">
+                    <label class="form-label" data-lang="subject">Subject</label>
+                    <input type="text" class="form-input" id="fbSubject" placeholder="Enter subject...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-lang="message">Message</label>
+                    <textarea class="form-input" id="fbMessage" placeholder="Write your problem or suggestion..."></textarea>
+                </div>
+                <button class="btn-action" onclick="sendFeedback()">
+                    <svg style="width:20px; fill:white" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    <span data-lang="sendBtn">Send Email</span>
+                </button>
+            </div>
+
         </div>
 
-        <div class="footer">
-            <p class="disclaimer">
-                <strong>Disclaimer:</strong> This website and its content are for educational and technical repair purposes only. Use these files responsibly.
-            </p>
-            <div class="dev-info">
-                <p>Developed by <span style="font-weight:700; color:var(--text-main)">Mahim Patwary</span></p>
-                <a href="mailto:mahimfzx@gmail.com">mahimfzx@gmail.com</a>
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('home', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span data-lang="navHome">Home</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('share', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                <span data-lang="navShare">Share</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('feedback', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+                <span data-lang="navFeed">Feedback</span>
             </div>
         </div>
+
     </div>
 
     <div id="detailView" class="detail-view">
-        <div class="detail-header">
-            <button class="back-btn" onclick="closeDetails()">
-                <svg class="back-svg" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            </button>
-            <div class="detail-title" id="dtTitle">Details</div>
+        <div class="dt-header">
+            <div onclick="closeDetails()" style="cursor:pointer; padding:5px;">
+                <svg viewBox="0 0 24 24" style="width:28px; fill:var(--text-main)"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </div>
+            <div style="font-weight:700; font-size:18px;" id="dtTitle">Model Name</div>
         </div>
-        <div class="detail-content" id="dtContent"></div>
+        <div class="dt-content" id="dtContent"></div>
     </div>
 
     <div id="pdfOverlay" class="pdf-overlay">
         <div class="pdf-toolbar">
-            <span style="font-weight:600;">Full Screen View</span>
+            <span style="font-weight:600;">Schematic View</span>
             <div class="pdf-controls">
-                <div class="ctrl-btn" onclick="pdfZoom(-0.1)">−</div>
-                <div class="ctrl-btn" onclick="pdfZoom(0.1)">+</div>
-                <button class="ctrl-btn" style="background:#e53e3e; border-color:#e53e3e" onclick="closeFullPdf()">✕</button>
+                <div class="zoom-btn" onclick="pdfZoom(0.2)">+</div>
+                <div class="zoom-btn" onclick="pdfZoom(-0.2)">−</div>
+                <div class="zoom-btn" onclick="pdfReset()" style="font-size:10px">RST</div>
+                <button onclick="closeFullPdf()" style="background:none; border:none; color:white; font-size:24px; margin-left:10px;">✕</button>
             </div>
         </div>
         <div class="pdf-container">
-            <iframe id="fullPdfFrame" src=""></iframe>
+            <div id="pdfWrapper" class="pdf-wrapper">
+                <iframe id="fullPdfFrame" src=""></iframe>
+            </div>
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURATION
-        // ==========================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycby-Mj4FPLQaCtRBsAQ4vYgFnzZOqZ-E1prVqISq5FIclFqBwC2xsxOzLHD99wf0TGON/exec'; 
-
+        // CONFIG
+        const API_URL = 'https://script.google.com/macros/s/AKfycby-Mj4FPLQaCtRBsAQ4vYgFnzZOqZ-E1prVqISq5FIclFqBwC2xsxOzLHD99wf0TGON/exec';
+        
+        // ICONS
         const ICONS = {
             pdf: '<svg class="info-icon" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>',
             image: '<svg class="info-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>',
             text: '<svg class="info-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>',
-            download: '<svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>',
-            eye: '<svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>',
-            full: '<svg class="btn-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>',
-            sun: '<svg class="info-icon" viewBox="0 0 24 24" style="fill:var(--text-main)"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.79 1.41-1.41-1.79-1.79-1.41 1.41zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>',
-            moon: '<svg class="info-icon" viewBox="0 0 24 24" style="fill:var(--text-main)"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>'
+            download: '<svg style="width:16px; fill:white" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>',
+            eye: '<svg style="width:16px; fill:white" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>',
+            full: '<svg style="width:16px; fill:white" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>'
         };
 
+        // LANGUAGE DATA
+        const dict = {
+            en: {
+                search: "Search schematic...",
+                refresh: "Refresh Data",
+                all: "All Models",
+                navHome: "Home",
+                navShare: "Share",
+                navFeed: "Feedback",
+                shareTitle: "Share with Friends",
+                shareDesc: "Scan or click below to share this app.",
+                shareBtn: "Share App",
+                feedTitle: "Feedback",
+                subject: "Subject",
+                message: "Message",
+                sendBtn: "Send Email",
+                marquee: "Welcome to Schematic Pro. Disclaimer: Use these files for educational and repair purposes only."
+            },
+            bn: {
+                search: "মডেল সার্চ করুন...",
+                refresh: "রিফ্রেশ করুন",
+                all: "সব মডেল",
+                navHome: "হোম",
+                navShare: "শেয়ার",
+                navFeed: "ফিডব্যাক",
+                shareTitle: "বন্ধুদের সাথে শেয়ার করুন",
+                shareDesc: "স্ক্যান বা ক্লিক করে অ্যাপটি শেয়ার করুন।",
+                shareBtn: "শেয়ার অ্যাপ",
+                feedTitle: "মতামত দিন",
+                subject: "বিষয়",
+                message: "আপনার বার্তা",
+                sendBtn: "ইমেইল পাঠান",
+                marquee: "আসসালামু আলাইকুম! Schematic Pro তে স্বাগতম। ডিসক্লেইমার: এই ফাইলগুলো শুধুমাত্র শিক্ষামূলক এবং মেরামতের কাজের জন্য ব্যবহার করুন।"
+            }
+        };
+
+        // STATE
         let allData = [];
         let currentData = [];
-        let currentZoom = 1;
+        let currentLang = localStorage.getItem('lang') || 'bn';
+        let pdfScale = 1;
 
-        // 1. THEME LOGIC (Added Back)
+        // 1. INIT & LANGUAGE
+        function init() {
+            setLanguage(currentLang);
+            loadData();
+            // Generate QR Code on Init
+            generateQRCode();
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'bn' : 'en';
+            localStorage.setItem('lang', currentLang);
+            setLanguage(currentLang);
+        }
+
+        function setLanguage(lang) {
+            document.getElementById('langBtn').innerText = lang.toUpperCase();
+            
+            // Text Elements
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if(dict[lang][key]) el.innerText = dict[lang][key];
+            });
+
+            // Input Placeholders
+            document.getElementById('searchBox').placeholder = dict[lang].search;
+            document.getElementById('fbSubject').placeholder = lang === 'bn' ? 'বিষয় লিখুন...' : 'Enter subject...';
+            document.getElementById('fbMessage').placeholder = lang === 'bn' ? 'আপনার সমস্যা বা পরামর্শ লিখুন...' : 'Write your problem or suggestion...';
+
+            // Marquee
+            document.getElementById('marqueeText').innerText = dict[lang].marquee;
+        }
+
+        // 2. THEME LOGIC
         function toggleTheme() {
             const body = document.body;
             const btn = document.getElementById('themeBtn');
@@ -460,65 +621,58 @@
             
             if (isDark) {
                 body.removeAttribute('data-theme');
-                btn.innerHTML = ICONS.moon;
+                btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:var(--text-main)"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>`;
             } else {
                 body.setAttribute('data-theme', 'dark');
-                btn.innerHTML = ICONS.sun;
+                btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:var(--text-main)"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.79 1.41-1.41-1.79-1.79-1.41 1.41zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>`;
             }
         }
 
-        // 2. INITIALIZATION & STORAGE LOGIC
-        async function init() {
-            // Step 1: Check Local Storage & Load immediately
-            const cachedData = localStorage.getItem('schematicData');
-            if (cachedData) {
-                console.log("Loading from Local Storage");
-                allData = JSON.parse(cachedData);
+        // 3. DATA & REFRESH
+        async function loadData() {
+            const cached = localStorage.getItem('schematicData');
+            if (cached) {
+                allData = JSON.parse(cached);
                 currentData = allData;
                 renderList(currentData);
             }
 
-            // Step 2: Background Fetch API
             try {
                 const res = await fetch(API_URL);
                 const newData = await res.json();
-                
-                // Compare length to see if update needed
-                if (JSON.stringify(newData) !== cachedData) {
-                    console.log("New Data Found, Updating...");
+                if (JSON.stringify(newData) !== cached) {
                     localStorage.setItem('schematicData', JSON.stringify(newData));
                     allData = newData;
                     currentData = allData;
                     renderList(currentData);
                 }
-            } catch (e) {
-                console.error("Fetch Error:", e);
-                if (!cachedData) {
-                    document.getElementById('listView').innerHTML = `<div style="text-align:center;padding:20px;color:red;">Internet check korun.</div>`;
-                }
-            }
+            } catch (e) { console.error(e); }
         }
 
-        // 3. RENDER LIST
+        function forceRefresh() {
+            document.getElementById('spinIcon').classList.add('spinning');
+            localStorage.removeItem('schematicData');
+            loadData().then(() => {
+                setTimeout(() => document.getElementById('spinIcon').classList.remove('spinning'), 1000);
+            });
+        }
+
         function renderList(data) {
             const container = document.getElementById('listView');
             container.innerHTML = '';
             
-            if (data.length === 0) {
-                container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-sub)">No results found.</div>`;
+            if (!data.length) {
+                container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--text-sub)">${currentLang==='bn'?'কোনো তথ্য পাওয়া যায়নি':'No data found'}</div>`;
                 return;
             }
 
             const fragment = document.createDocumentFragment();
             data.forEach(item => {
-                const modelName = item['Model Name'] || 'Unknown';
                 const div = document.createElement('div');
                 div.className = 'list-item';
                 div.innerHTML = `
-                    <div class="model-info">
-                        <span class="model-name">${modelName}</span>
-                    </div>
-                    <svg class="arrow-svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    <div class="model-name">${item['Model Name'] || 'Unknown'}</div>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
                 `;
                 div.onclick = () => openDetails(item);
                 fragment.appendChild(div);
@@ -526,13 +680,41 @@
             container.appendChild(fragment);
         }
 
-        // 4. SEARCH & SORT
+        // 4. NAVIGATION & TABS
+        function switchTab(tab, el) {
+            // UI Update
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+
+            // View Switch
+            document.getElementById('listView').style.display = 'none';
+            document.getElementById('mainFooter').style.display = 'none'; // Hide footer on other tabs
+            document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+
+            if (tab === 'home') {
+                document.getElementById('listView').style.display = 'block';
+                document.getElementById('mainFooter').style.display = 'block'; // Show footer
+                // Reset search when going home
+                document.getElementById('searchBox').value = '';
+                currentData = allData;
+                renderList(currentData);
+            } else if (tab === 'share') {
+                document.getElementById('shareView').classList.add('active');
+            } else if (tab === 'feedback') {
+                document.getElementById('feedbackView').classList.add('active');
+            }
+        }
+
+        // 5. FUNCTIONALITIES (Search, Sort, Feedback, Share)
         document.getElementById('searchBox').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase().trim();
+            // Force switch to home list if searching
+            if(document.getElementById('listView').style.display === 'none') {
+                document.querySelectorAll('.nav-item')[0].click();
+            }
+            
             currentData = allData.filter(item => {
-                return Object.values(item).some(val => 
-                    String(val).toLowerCase().includes(term)
-                );
+                return Object.values(item).some(val => String(val).toLowerCase().includes(term));
             });
             renderList(currentData);
         });
@@ -540,29 +722,50 @@
         function sortData(type, el) {
             document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             el.classList.add('active');
-            if(type === 'all') {
-                document.getElementById('searchBox').value = '';
-                currentData = [...allData];
-            } else if (type === 'asc') {
-                currentData.sort((a, b) => (a['Model Name'] || '').localeCompare(b['Model Name'] || ''));
-            } else if (type === 'desc') {
-                currentData.sort((a, b) => (b['Model Name'] || '').localeCompare(a['Model Name'] || ''));
-            }
+            
+            if(type === 'all') currentData = [...allData];
+            else if (type === 'asc') currentData.sort((a,b)=>(a['Model Name']||'').localeCompare(b['Model Name']||''));
+            else if (type === 'desc') currentData.sort((a,b)=>(b['Model Name']||'').localeCompare(a['Model Name']||''));
+            
             renderList(currentData);
         }
 
-        // Helper: Extract Drive ID
+        function sendFeedback() {
+            const sub = document.getElementById('fbSubject').value;
+            const msg = document.getElementById('fbMessage').value;
+            window.location.href = `mailto:mahimfzx@gmail.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(msg)}`;
+        }
+
+        // QR GENERATOR & SHARE
+        function generateQRCode() {
+            const url = window.location.href;
+            const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+            document.getElementById('qrImage').src = qrApi;
+        }
+
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Schematic Pro',
+                    text: 'Check out this Schematic App!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share URL copied!');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        }
+
+        // 6. DETAILS LOGIC
         function getDriveId(url) {
             if (!url || typeof url !== 'string') return null;
             const match = url.match(/[-\w]{25,}/);
             return match ? match[0] : null;
         }
 
-        // 5. DETAILS PAGE LOGIC
         function openDetails(item) {
             const title = document.getElementById('dtTitle');
             const content = document.getElementById('dtContent');
-            
             title.innerText = item['Model Name'];
             content.innerHTML = '';
 
@@ -575,11 +778,11 @@
                 
                 let boxHTML = '';
 
-                // PDF Logic
                 if (key.endsWith('_pdf')) {
+                    // Use preview mode for better compatibility
                     let pdfSrc = strValue; 
                     if (driveId) pdfSrc = `https://drive.google.com/file/d/${driveId}/preview`;
-
+                    
                     boxHTML = `
                         <div class="info-box">
                             <div class="info-header">${ICONS.pdf} <span class="info-label">${cleanLabel}</span></div>
@@ -587,10 +790,8 @@
                                 <a href="${strValue}" target="_blank" class="btn btn-dl">${ICONS.download} Download</a>
                                 <button onclick="togglePreview('p-${key}')" class="btn btn-view">${ICONS.eye} Preview</button>
                             </div>
-                            <button onclick="openFullPdf('${pdfSrc}')" class="btn btn-full">${ICONS.full} Full Screen & Search</button>
-                            <div id="p-${key}" class="preview-area">
-                                <iframe loading="lazy" src="${pdfSrc}" allow="autoplay"></iframe>
-                            </div>
+                            <button onclick="openFullPdf('${pdfSrc}')" class="btn btn-full">${ICONS.full} Full Screen Schematic</button>
+                            <div id="p-${key}" class="preview-area"><iframe loading="lazy" src="${pdfSrc}" allow="autoplay"></iframe></div>
                         </div>`;
                 }
                 else if (key.endsWith('_img')) {
@@ -599,84 +800,66 @@
                     boxHTML = `
                         <div class="info-box">
                             <div class="info-header">${ICONS.image} <span class="info-label">${cleanLabel}</span></div>
-                            <div style="display:grid; grid-template-columns:1fr; gap:10px;">
-                                <button onclick="togglePreview('i-${key}')" class="btn btn-view">${ICONS.eye} View Image</button>
-                            </div>
-                            <div id="i-${key}" class="preview-area">
-                                <img loading="lazy" src="${imgSrc}" alt="Preview">
-                            </div>
+                            <button onclick="togglePreview('i-${key}')" class="btn btn-view">${ICONS.eye} View Image</button>
+                            <div id="i-${key}" class="preview-area"><img loading="lazy" src="${imgSrc}" alt="Preview"></div>
                         </div>`;
                 } else {
                     boxHTML = `
                         <div class="info-box">
                             <div class="info-header">${ICONS.text} <span class="info-label">${cleanLabel}</span></div>
-                            <div style="font-size:15px; color:var(--text-main); line-height:1.6;">${value}</div>
+                            <div style="font-size:15px; line-height:1.6;">${value}</div>
                         </div>`;
                 }
                 content.innerHTML += boxHTML;
             }
-
             document.getElementById('detailView').classList.add('active');
-            document.body.style.overflow = 'hidden';
         }
 
-        function closeDetails() {
-            document.getElementById('detailView').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
+        function closeDetails() { document.getElementById('detailView').classList.remove('active'); }
         function togglePreview(id) {
             const el = document.getElementById(id);
             el.style.display = (el.style.display === 'block') ? 'none' : 'block';
         }
 
-        // 6. FULL SCREEN PDF LOGIC
+        // 7. FULL SCREEN PDF LOGIC (Zoom & Reset)
         function openFullPdf(url) {
-            const overlay = document.getElementById('pdfOverlay');
-            const frame = document.getElementById('fullPdfFrame');
-            frame.src = url;
-            overlay.classList.add('open');
-            currentZoom = 1;
-            frame.style.transform = `scale(${currentZoom})`;
+            document.getElementById('fullPdfFrame').src = url;
+            document.getElementById('pdfOverlay').classList.add('open');
+            pdfReset();
         }
-
         function closeFullPdf() {
-            const overlay = document.getElementById('pdfOverlay');
-            const frame = document.getElementById('fullPdfFrame');
-            overlay.classList.remove('open');
-            frame.src = ""; 
+            document.getElementById('pdfOverlay').classList.remove('open');
+            document.getElementById('fullPdfFrame').src = "";
+        }
+        
+        function pdfZoom(amount) {
+            pdfScale += amount;
+            if (pdfScale < 0.5) pdfScale = 0.5;
+            if (pdfScale > 3) pdfScale = 3;
+            updatePdfTransform();
         }
 
-        function pdfZoom(amount) {
-            const frame = document.getElementById('fullPdfFrame');
-            currentZoom += amount;
-            if(currentZoom < 0.5) currentZoom = 0.5;
-            if(currentZoom > 3) currentZoom = 3;
-            frame.style.transform = `scale(${currentZoom})`;
-            if(currentZoom > 1) {
-                frame.style.width = `${100/currentZoom}%`;
-                frame.style.height = `${100/currentZoom}%`;
-                frame.style.marginLeft = `${(100 - (100/currentZoom))/2}%`;
-                frame.style.marginTop = `${(100 - (100/currentZoom))/2}%`;
+        function pdfReset() {
+            pdfScale = 1;
+            updatePdfTransform();
+        }
+
+        function updatePdfTransform() {
+            const wrapper = document.getElementById('pdfWrapper');
+            wrapper.style.transform = `scale(${pdfScale})`;
+            // Adjust width/height to allow scrolling when zoomed in
+            if(pdfScale > 1) {
+                wrapper.style.width = `${100 * pdfScale}%`;
+                wrapper.style.height = `${100 * pdfScale}%`;
             } else {
-                frame.style.width = '100%';
-                frame.style.height = '100%';
-                frame.style.marginLeft = '0';
-                frame.style.marginTop = '0';
+                wrapper.style.width = '100%';
+                wrapper.style.height = '100%';
             }
         }
 
+        // Start
         init();
-    </script>
-    <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('Service Worker Registered!', reg.scope))
-                .catch(err => console.log('Service Worker Failed!', err));
-        });
-    }
-</script>
 
+    </script>
 </body>
 </html>
